@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  glassy-pass:
+    container_name: glassy-pass
+    build: .
+    image: glassy-pass:latest
+    restart: unless-stopped
+    ports:
+      - "8080:80" # NAS의 8080 포트로 접속 (필요하면 8080을 다른 숫자로 바꾸세요)
+    volumes:
+      - ./:/usr/share/nginx/html # (선택사항) 개발 중 실시간 수정 반영용. 배포만 할 땐 빼도 됩니다.
