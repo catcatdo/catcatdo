@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: rathena-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ragnarok
+      MYSQL_DATABASE: ragnarok
+      MYSQL_USER: ragnarok
+      MYSQL_PASSWORD: ragnarok
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./server/sql-files:/docker-entrypoint-initdb.d:ro
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - rathena-network
+
+  rathena:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: rathena-server
+    depends_on:
+      - mysql
+    ports:
+      - "6900:6900"  # map-server
+      - "6121:6121"  # char-server
+      - "5121:5121"  # login-server
+    volumes:
+      - ./server/conf:/rathena/conf
+      - ./server/db:/rathena/db
+      - ./server/npc:/rathena/npc
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=ragnarok
+      - DB_PASS=ragnarok
+      - DB_NAME=ragnarok
+    networks:
+      - rathena-network
+    stdin_open: true
+    tty: true
+
+volumes:
+  mysql_data:
+
+networks:
+  rathena-network:
+    driver: bridge
