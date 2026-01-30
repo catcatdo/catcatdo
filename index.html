@@ -1,14 +1,60 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Glassy Pass</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter for that clean Apple look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔐</text></svg>">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="glass-card">
+        <header>
+            <h1>Password Gen</h1>
+            <p>안전한 비밀번호를 생성하고 저장하세요</p>
+        </header>
+
+        <div class="input-group">
+            <label for="siteName">사이트 이름</label>
+            <input type="text" id="siteName" placeholder="예: Google, Naver" autocomplete="off">
+        </div>
+
+        <button id="generateBtn" class="primary-btn">
+            <span class="btn-text">비밀번호 생성하기</span>
+            <div class="shimmer"></div>
+        </button>
+
+        <div class="result-container hidden" id="resultContainer">
+            <div class="password-display">
+                <span id="passwordOutput">Loading...</span>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="copyBtn" class="icon-btn" aria-label="복사하기">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    복사
+                </button>
+                <button id="shareBtn" class="icon-btn" aria-label="공유하기">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                    저장/공유
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="toast">클립보드에 복사되었습니다!</div>
+
+    <script type="module" src="main.js"></script>
 </body>
 </html>
