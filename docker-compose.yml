@@ -7,5 +7,7 @@ services:
     restart: unless-stopped
     ports:
       - "8899:80"
+    # 시놀로지 파일 권한 문제를 해결하기 위해 root 권한으로 실행
+    user: root
     volumes:
       - ./:/usr/share/nginx/html:ro
